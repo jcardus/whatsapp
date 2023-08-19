@@ -13,11 +13,15 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
-    "core-js": "^3.25.3",
+    "@nuxtjs/firebase": "^8.2.2",
+    "core-js": "3.32.1",
+    "firebase": "^9.23.0",
     "nuxt": "^2.15.8",
     "vue": "^2.7.10",
+    "vue-advanced-chat": "^2.0.7",
     "vue-server-renderer": "^2.7.10",
-    "vue-template-compiler": "^2.7.10"
+    "vue-template-compiler": "^2.7.10",
+    "vuexfire": "^3.2.5"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
