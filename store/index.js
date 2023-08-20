@@ -17,19 +17,48 @@ export const mutations = {
     }
   }
 }
+const root = '15864967972'
 
 export const actions = {
+  bindMessages: firestoreAction(function ({ bindFirestoreRef }, roomId) {
+    return bindFirestoreRef('messages',
+      this.$fire.firestore.collection(`${root}/${roomId}/messages`).orderBy('timestamp'))
+  }),
+  unbindMessages: firestoreAction(({ unbindFirestoreRef }) => {
+    unbindFirestoreRef('messages')
+  }),
   onAuthStateChangedAction: () => {},
   bindRooms: firestoreAction(function ({ bindFirestoreRef }) {
-    return bindFirestoreRef('rooms', this.$fire.firestore.collection('15864967972'))
-  })
+    return bindFirestoreRef('rooms', this.$fire.firestore.collection(root))
+  }),
+  async sendMessage (context, message) {
+    const data = {
+      messaging_product: 'whatsapp',
+      from: root,
+      to: message.roomId,
+      type: 'text',
+      text: {
+        body: message.content
+      },
+      timestamp: new Date().getTime().toString().substring(0, 10)
+    }
+    const { messages } = await this.$axios.$post('/', data)
+    return this.$fire.firestore
+      .collection(`${root}/${message.roomId}/messages`)
+      .doc(messages[0].id)
+      .set({ ...data, id: messages[0].id })
+  }
 }
 
 export const getters = {
-  rooms: state => state.rooms
+  currentUser: () => root,
+  rooms: state => state.rooms,
+  messages: state => state.messages,
+  roomsLoaded: state => state.rooms.length !== 0
 }
 
 export const state = () => ({
   user: {},
-  rooms: []
+  rooms: [],
+  messages: []
 })

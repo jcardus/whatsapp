@@ -18,3 +18,5 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHATSAPP_21FF1 }}'
           channelId: live
           projectId: whatsapp-21ff1
+          WHATSAPP_TOKEN: '${{ secrets.WHATSAPP_TOKEN }}'
+          WHATSAPP_PNI: '${{ secrets.WHATSAPP_PNI }}'
