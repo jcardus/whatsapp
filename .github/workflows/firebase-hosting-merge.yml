@@ -15,6 +15,7 @@ jobs:
         env:
           WHATSAPP_TOKEN: '${{ secrets.WHATSAPP_TOKEN }}'
           WHATSAPP_PNI: '${{ secrets.WHATSAPP_PNI }}'
+          apiKey: '${{ secrets.APIKEY }}'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
