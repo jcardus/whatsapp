@@ -12,11 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm ci && npm run generate
+        env:
+          WHATSAPP_TOKEN: '${{ secrets.WHATSAPP_TOKEN }}'
+          WHATSAPP_PNI: '${{ secrets.WHATSAPP_PNI }}'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WHATSAPP_21FF1 }}'
           channelId: live
           projectId: whatsapp-21ff1
-          WHATSAPP_TOKEN: '${{ secrets.WHATSAPP_TOKEN }}'
-          WHATSAPP_PNI: '${{ secrets.WHATSAPP_PNI }}'
