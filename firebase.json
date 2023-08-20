@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "wa-messaging",
     "public": "dist",
     "ignore": [
       "firebase.json",
