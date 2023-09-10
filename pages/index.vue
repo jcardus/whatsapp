@@ -62,7 +62,7 @@ export default {
     ...mapGetters(['roomsLoaded', 'currentUser']),
     messages () {
       return this.$store.getters.messages.map(m => ({
-        content: m.text.body,
+        content: m.text && m.text.body,
         _id: m.id,
         senderId: m.from,
         timestamp: parseTimestamp(new Date(m.timestamp * 1000), 'HH:mm'),
