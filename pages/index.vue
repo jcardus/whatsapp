@@ -73,6 +73,9 @@ export default {
       return this.$store.getters.rooms.map((r) => {
         return {
           roomName: r.name,
+          lastMessage: {
+            content: r.wa_id
+          },
           avatar: 'https://ui-avatars.com/api/?name=' + r.name,
           roomId: r.wa_id,
           users: [
