@@ -1,4 +1,5 @@
 # whatsapp
+Whatsapp client with [nuxt](https://nuxtjs.org) and [vue-advanced-chat](https://github.dev/antoine92190).
 
 ## Build Setup
 
