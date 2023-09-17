@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+import '~/node_modules/firebaseui/dist/firebaseui.css'
 import { GoogleAuthProvider, EmailAuthProvider } from 'firebase/auth'
 const firebaseUi = require('firebaseui')
 
@@ -24,20 +25,15 @@ export default {
     }
     ui.disableAutoSignIn()
     if (this.$store.state.user && this.$store.state.user.email) {
-      this.openAppPage()
+      this.$router.push('/')
     } else {
       ui.start('#firebaseui-auth-container', config)
     }
   },
   methods: {
     signInResult () {
-      this.openAppPage()
-      return false
-    },
-    openAppPage () {
-      this.$router.push('/')
+      window.location.href = '/'
     }
   }
 }
 </script>
-<style src="~/node_modules/firebaseui/dist/firebaseui.css"></style>
