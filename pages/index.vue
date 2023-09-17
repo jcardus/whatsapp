@@ -63,8 +63,7 @@ export default {
     messages () {
       return this.$store.getters.messages.map(m => ({
         content: m.text && m.text.body,
-        messageId: m.id,
-        _id: m.id,
+        _id: m.id.replace('wamid.', ''),
         senderId: m.from,
         timestamp: parseTimestamp(new Date(m.timestamp * 1000), 'HH:mm'),
         date: parseTimestamp(new Date(m.timestamp * 1000), 'DD MMMM YYYY'),
