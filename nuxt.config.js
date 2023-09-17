@@ -2,6 +2,11 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  env: {
+    WHATSAPP_TOKEN: process.env.WHATSAPP_TOKEN,
+    CLOUDFRONT_URL: process.env.CLOUDFRONT_URL
+  },
+
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -72,7 +77,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     headers: { Authorization: 'Bearer ' + process.env.WHATSAPP_TOKEN },
-    baseURL: `https://graph.facebook.com/v13.0/${process.env.WHATSAPP_PNI}/messages`
+    baseURL: `https://graph.facebook.com/v13.0/${process.env.WHATSAPP_PNI}`
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}
