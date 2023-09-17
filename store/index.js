@@ -42,7 +42,7 @@ export const actions = {
       },
       timestamp: new Date().getTime().toString().substring(0, 10)
     }
-    const { messages } = await this.$axios.$post('/', data)
+    const { messages } = await this.$axios.$post('messages', data)
     return this.$fire.firestore
       .collection(`${root}/${message.roomId}/messages`)
       .doc(messages[0].id)

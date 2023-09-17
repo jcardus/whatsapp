@@ -63,10 +63,22 @@ export default {
     messages () {
       return this.$store.getters.messages.map(m => ({
         content: m.text && m.text.body,
+        messageId: m.id,
         _id: m.id,
         senderId: m.from,
         timestamp: parseTimestamp(new Date(m.timestamp * 1000), 'HH:mm'),
-        date: parseTimestamp(new Date(m.timestamp * 1000), 'DD MMMM YYYY')
+        date: parseTimestamp(new Date(m.timestamp * 1000), 'DD MMMM YYYY'),
+        ...(m.image || m.audio
+          ? {
+              files: [
+                {
+                  audio: m.audio && m.audio.voice,
+                  type: (m.image || m.audio).mime_type.split(';')[0],
+                  url: `${process.env.CLOUDFRONT_URL}/${(m.image || m.audio).id}`
+                }
+              ]
+            }
+          : {})
       }))
     },
     rooms () {
