@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "wa-messaging",
+    "site": "outbox",
     "public": "dist",
     "ignore": [
       "firebase.json",
