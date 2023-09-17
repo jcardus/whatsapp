@@ -14,6 +14,7 @@ jobs:
       - run: npm ci && npm run generate
         env:
           WHATSAPP_TOKEN: '${{ secrets.WHATSAPP_TOKEN }}'
+          CLOUDFRONT_URL: '${{ secrets.CLOUDFRONT_URL }}'
           WHATSAPP_PNI: '${{ secrets.WHATSAPP_PNI }}'
           apiKey: '${{ secrets.APIKEY }}'
       - uses: FirebaseExtended/action-hosting-deploy@v0
