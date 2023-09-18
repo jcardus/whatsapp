@@ -60,7 +60,7 @@ export default {
     messages () {
       return this.$store.getters.messages.map(m => ({
         content: m.text && m.text.body,
-        _id: m.id.replace('wamid.', ''),
+        _id: m.id.replace('wamid.', '').replace(/=/g, ''),
         senderId: m.from,
         timestamp: parseTimestamp(new Date(m.timestamp * 1000), 'HH:mm'),
         date: parseTimestamp(new Date(m.timestamp * 1000), 'DD MMMM YYYY'),
@@ -70,7 +70,7 @@ export default {
                 {
                   audio: m.audio && m.audio.voice,
                   type: (m.image || m.audio).mime_type && (m.image || m.audio).mime_type.split(';')[0],
-                  url: m.image.link || `${process.env.CLOUDFRONT_URL}/${(m.image || m.audio).id}`
+                  url: (m.image || m.audio).link || `${process.env.CLOUDFRONT_URL}/${(m.image || m.audio).id}`
                 }
               ]
             }
