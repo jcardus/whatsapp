@@ -60,6 +60,7 @@ export default {
           appId: '1:209653827456:web:9161832f73d1ba72432365'
         },
         services: {
+          storage: true,
           firestore: true,
           auth: {
             persistence: 'local', // default

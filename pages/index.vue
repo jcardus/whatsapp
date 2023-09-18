@@ -1,10 +1,7 @@
 <template>
-  <div style="height: 100%; padding: 20px;">
-    <div>
-      {{ $store.state.user && $store.state.user.email }}
-      <p />
-    </div>
+  <div style="height: 100%">
     <vue-advanced-chat
+      height="100vh"
       :current-user-id="currentUser"
       :rooms="JSON.stringify(rooms)"
       :rooms-loaded="roomsLoaded"
@@ -72,8 +69,8 @@ export default {
               files: [
                 {
                   audio: m.audio && m.audio.voice,
-                  type: (m.image || m.audio).mime_type.split(';')[0],
-                  url: `${process.env.CLOUDFRONT_URL}/${(m.image || m.audio).id}`
+                  type: (m.image || m.audio).mime_type && (m.image || m.audio).mime_type.split(';')[0],
+                  url: m.image.link || `${process.env.CLOUDFRONT_URL}/${(m.image || m.audio).id}`
                 }
               ]
             }

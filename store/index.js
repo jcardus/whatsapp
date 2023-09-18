@@ -1,4 +1,5 @@
 import { firestoreAction, vuexfireMutations } from 'vuexfire'
+import { uploadBytes, getDownloadURL } from 'firebase/storage'
 
 export const mutations = {
   ...vuexfireMutations,
@@ -37,12 +38,21 @@ export const actions = {
       from: root,
       to: message.roomId,
       type: 'text',
-      text: {
-        body: message.content
-      },
+      ...(message.content ? { text: { body: message.content } } : {}),
       timestamp: new Date().getTime().toString().substring(0, 10)
     }
+    if (message.files) {
+      const ref = this.$fire.storage.ref('file' + new Date().getTime())
+      await uploadBytes(ref, message.files[0].blob, { contentType: message.files[0].type })
+      data.image = {
+        link: await getDownloadURL(ref)
+      }
+      data.type = 'image'
+    }
     const { messages } = await this.$axios.$post('messages', data)
+    if (data.image) {
+      data.image.mime_type = message.files[0].type
+    }
     return this.$fire.firestore
       .collection(`${root}/${message.roomId}/messages`)
       .doc(messages[0].id)
